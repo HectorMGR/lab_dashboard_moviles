@@ -159,27 +159,8 @@ El dashboard simula el rol de **Administrador**, con acceso completo a todos los
 
 ---
 
-## Documentación técnica
-
-El manual técnico del proyecto debe incluir:
-
-1. **Portada** — Nombre del proyecto, integrantes, curso, fecha
-2. **Introducción** — Propósito del dashboard y relación con el proyecto grupal de barbería
-3. **Arquitectura** — Diagrama de carpetas y explicación de cada capa
-4. **Módulos implementados** — Captura de pantalla y descripción de cada módulo
-5. **Navegación** — Configuración de go_router y tabla de rutas
-6. **Datos mock** — Estructura y justificación del uso de datos simulados
-7. **Gráficos** — Librerías utilizadas y datos representados
-8. **Diseño responsive** — Puntos de quiebre y adaptaciones
-9. **Librerías** — Listado completo con justificación
-10. **Integración futura** — Roadmap para conexión con backend real
-11. **Conclusiones** — Aprendizajes y posibles mejoras
-12. **Anexo** — Código fuente completo o enlace al repositorio
-
----
-
 ## Créditos
 
-Proyecto desarrollado como parte del curso **Laboratorio Programado Integrador**.
+Proyecto desarrollado como parte del curso **Diseño y Programación de Plataformas Móviles**.
 
 **Tecnología**: Flutter Web | **Lenguaje**: Dart | **Año**: 2026
