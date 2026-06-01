@@ -83,24 +83,36 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
     final metrics = [
       DashboardMetricModel(
-        title: 'Total Revenue', value: summary.totalRevenue,
-        icon: Icons.attach_money, trend: TrendDirection.up,
-        percentageChange: 9.2, color: AppColors.success,
+        title: 'Total Revenue',
+        value: summary.totalRevenue,
+        icon: Icons.attach_money,
+        trend: TrendDirection.up,
+        percentageChange: 9.2,
+        color: AppColors.success,
       ),
       DashboardMetricModel(
-        title: 'Total Appointments', value: summary.totalAppointments,
-        icon: Icons.calendar_today, trend: TrendDirection.up,
-        percentageChange: 12.5, color: AppColors.primary,
+        title: 'Total Appointments',
+        value: summary.totalAppointments,
+        icon: Icons.calendar_today,
+        trend: TrendDirection.up,
+        percentageChange: 12.5,
+        color: AppColors.primary,
       ),
       DashboardMetricModel(
-        title: 'Completion Rate', value: summary.completionRate,
-        icon: Icons.check_circle, trend: TrendDirection.up,
-        percentageChange: 5.3, color: AppColors.info,
+        title: 'Completion Rate',
+        value: summary.completionRate,
+        icon: Icons.check_circle,
+        trend: TrendDirection.up,
+        percentageChange: 5.3,
+        color: AppColors.info,
       ),
       DashboardMetricModel(
-        title: 'Avg. Rating', value: summary.avgRating,
-        icon: Icons.star, trend: TrendDirection.neutral,
-        percentageChange: 0, color: AppColors.accent,
+        title: 'Avg. Rating',
+        value: summary.avgRating,
+        icon: Icons.star,
+        trend: TrendDirection.neutral,
+        percentageChange: 0,
+        color: AppColors.accent,
       ),
     ];
 

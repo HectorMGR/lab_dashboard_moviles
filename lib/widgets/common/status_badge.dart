@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../models/appointment_model.dart';
+import '../../core/theme/app_colors.dart';
+import '../../models/booking_model.dart';
 
 class StatusBadge extends StatelessWidget {
-  final AppointmentStatus status;
+  final BookingStatus status;
 
   const StatusBadge({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
-    final color = switch (status) {
-      AppointmentStatus.pending => AppColors.statusPending,
-      AppointmentStatus.confirmed => AppColors.statusConfirmed,
-      AppointmentStatus.completed => AppColors.statusCompleted,
-      AppointmentStatus.cancelled => AppColors.statusCancelled,
-    };
+    final color = status.color;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

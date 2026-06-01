@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 import '../../controllers/client_provider.dart';
 import '../../widgets/common/section_header.dart';
-import '../../widgets/common/status_badge.dart';
 import '../../widgets/tables/data_table_wrapper.dart';
 import '../../core/utils/responsive_helper.dart';
 
@@ -67,30 +65,16 @@ class _ClientsScreenState extends State<ClientsScreen> {
               columns: const [
                 DataColumn(label: Text('Name')),
                 DataColumn(label: Text('Email')),
-                DataColumn(label: Text('Phone')),
-                DataColumn(label: Text('Appointments'), numeric: true),
-                DataColumn(label: Text('Last Appointment')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+                DataColumn(label: Text('Active')),
               ],
               rows: provider.clients.map((client) {
-                final dateStr = DateFormat('MMM dd, yyyy').format(client.lastAppointment);
                 return DataRow(cells: [
-                  DataCell(Text(client.name, style: const TextStyle(fontWeight: FontWeight.w500))),
+                  DataCell(Text(client.fullName, style: const TextStyle(fontWeight: FontWeight.w500))),
                   DataCell(Text(client.email)),
-                  DataCell(Text(client.phone)),
-                  DataCell(Text(client.totalAppointments.toString())),
-                  DataCell(Text(dateStr)),
-                  DataCell(ActiveBadge(isActive: client.isActive)),
-                  DataCell(
-                    PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert, size: 18),
-                      itemBuilder: (ctx) => const [
-                        PopupMenuItem(value: 'view', child: Text('View')),
-                        PopupMenuItem(value: 'edit', child: Text('Edit')),
-                      ],
-                    ),
-                  ),
+                  DataCell(Switch(
+                    value: client.isActive,
+                    onChanged: null,
+                  )),
                 ]);
               }).toList(),
             ),

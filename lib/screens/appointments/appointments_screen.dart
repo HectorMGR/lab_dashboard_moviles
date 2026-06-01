@@ -83,34 +83,21 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 DataColumn(label: Text('ID')),
                 DataColumn(label: Text('Client')),
                 DataColumn(label: Text('Barber')),
-                DataColumn(label: Text('Barber Shop')),
                 DataColumn(label: Text('Service')),
                 DataColumn(label: Text('Date & Time')),
                 DataColumn(label: Text('Status')),
                 DataColumn(label: Text('Price'), numeric: true),
-                DataColumn(label: Text('Actions')),
               ],
               rows: provider.appointments.map((apt) {
-                final dateStr = DateFormat('MMM dd, HH:mm').format(apt.dateTime);
+                final dateStr = DateFormat('MMM dd, HH:mm').format(apt.slotStart);
                 return DataRow(cells: [
                   DataCell(Text(apt.id, style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.5), fontSize: 12))),
                   DataCell(Text(apt.clientName, style: const TextStyle(fontWeight: FontWeight.w500))),
                   DataCell(Text(apt.barberName)),
-                  DataCell(Text(apt.barberShop)),
-                  DataCell(Text(apt.service)),
+                  DataCell(Text(apt.serviceName)),
                   DataCell(Text(dateStr)),
                   DataCell(StatusBadge(status: apt.status)),
                   DataCell(Text('\$${apt.price.toStringAsFixed(2)}')),
-                  DataCell(
-                    PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert, size: 18),
-                      itemBuilder: (ctx) => const [
-                        PopupMenuItem(value: 'view', child: Text('View')),
-                        PopupMenuItem(value: 'edit', child: Text('Edit')),
-                        PopupMenuItem(value: 'cancel', child: Text('Cancel')),
-                      ],
-                    ),
-                  ),
                 ]);
               }).toList(),
             ),

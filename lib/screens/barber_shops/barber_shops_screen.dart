@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/barber_shop_provider.dart';
 import '../../widgets/common/section_header.dart';
-import '../../widgets/common/status_badge.dart';
 import '../../widgets/tables/data_table_wrapper.dart';
 import '../../core/utils/responsive_helper.dart';
 
@@ -39,7 +38,7 @@ class _BarberShopsScreenState extends State<BarberShopsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionHeader(
+          SectionHeader(
             title: 'Barber Shops',
             subtitle: 'Manage registered barber shops',
           ),
@@ -66,31 +65,29 @@ class _BarberShopsScreenState extends State<BarberShopsScreen> {
               columns: const [
                 DataColumn(label: Text('Name')),
                 DataColumn(label: Text('Owner')),
-                DataColumn(label: Text('Location')),
+                DataColumn(label: Text('Address')),
                 DataColumn(label: Text('Phone')),
-                DataColumn(label: Text('Barbers'), numeric: true),
-                DataColumn(label: Text('Appointments'), numeric: true),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+                DataColumn(label: Text('Rating')),
+                DataColumn(label: Text('Active')),
               ],
               rows: provider.shops.map((shop) {
                 return DataRow(cells: [
                   DataCell(Text(shop.name, style: const TextStyle(fontWeight: FontWeight.w500))),
-                  DataCell(Text(shop.owner)),
-                  DataCell(Text(shop.location)),
+                  DataCell(Text(shop.ownerName)),
+                  DataCell(Text(shop.address, overflow: TextOverflow.ellipsis)),
                   DataCell(Text(shop.phone)),
-                  DataCell(Text(shop.barberCount.toString())),
-                  DataCell(Text(shop.appointmentCount.toString())),
-                  DataCell(ActiveBadge(isActive: shop.isActive)),
-                  DataCell(
-                    PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert, size: 18),
-                      itemBuilder: (ctx) => const [
-                        PopupMenuItem(value: 'view', child: Text('View')),
-                        PopupMenuItem(value: 'edit', child: Text('Edit')),
-                      ],
-                    ),
-                  ),
+                  DataCell(Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.star, size: 16, color: Colors.amber),
+                      const SizedBox(width: 4),
+                      Text(shop.rating.toStringAsFixed(1)),
+                    ],
+                  )),
+                  DataCell(Switch(
+                    value: shop.isActive,
+                    onChanged: null,
+                  )),
                 ]);
               }).toList(),
             ),

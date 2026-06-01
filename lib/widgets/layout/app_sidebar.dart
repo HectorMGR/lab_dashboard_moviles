@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../controllers/auth_provider.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_colors.dart';
 
@@ -32,6 +34,8 @@ class AppSidebar extends StatelessWidget {
     final width = isExpanded
         ? AppConstants.sidebarExpandedWidth
         : AppConstants.sidebarCollapsedWidth;
+    final authProvider = context.watch<AuthProvider>();
+    final user = authProvider.userModel;
 
     return AnimatedContainer(
       duration: AppConstants.animationDuration,
@@ -58,7 +62,7 @@ class AppSidebar extends StatelessWidget {
             ),
           ),
           const Divider(color: AppColors.darkBorder, height: 1),
-          _buildFooter(),
+          _buildFooter(context, authProvider, user),
         ],
       ),
     );
@@ -103,17 +107,23 @@ class AppSidebar extends StatelessWidget {
     );
   }
 
-  Widget _buildFooter() {
+  Widget _buildFooter(BuildContext context, AuthProvider authProvider, user) {
+    final displayName = user?.fullName ?? 'Admin User';
+    final role = user?.role ?? 'Administrator';
+
     return Container(
       height: AppConstants.topbarHeight,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: isExpanded
           ? Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 14,
                   backgroundColor: AppColors.primary,
-                  child: Text('A', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+                  child: Text(
+                    displayName.isNotEmpty ? displayName[0].toUpperCase() : 'A',
+                    style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -121,13 +131,13 @@ class AppSidebar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Admin User',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
+                      Text(
+                        displayName,
+                        style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        'Administrator',
+                        role,
                         style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 10),
                         overflow: TextOverflow.ellipsis,
                       ),
